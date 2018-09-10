@@ -2,7 +2,7 @@
   "name": "graphql-server",
   "version": "1.0.0",
   "description": "Graphql server tutorial",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/patelg123/graphql-server/issues"
   },
-  "homepage": "https://github.com/patelg123/graphql-server#readme"
+  "homepage": "https://github.com/patelg123/graphql-server#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2"
+  }
 }
