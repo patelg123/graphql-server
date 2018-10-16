@@ -1,5 +1,4 @@
 # graphql-server
 
-The tutorial for this is available at:
+A simple GraphQL server built upon Node.js and Express middleware express-graphql.
 
-https://medium.com/codingthesmartway-com-blog/creating-a-graphql-server-with-node-js-and-express-f6dddc5320e1
