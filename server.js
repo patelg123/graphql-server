@@ -6,10 +6,6 @@ var coursesData = require('./data.js');
 
 // GraphQL schema
 const schema = buildSchema(`
-    type Query {
-        course(id: Int!): Course
-        courses(topic: String): [Course]
-    },
     type Course {
         id: Int
         title: String
@@ -17,10 +13,14 @@ const schema = buildSchema(`
         description: String
         topic: String
         url: String
+    },
+    type Query {
+        course(id: Int!): Course
+        courses(topic: String): [Course]
     }
 `);
 
-// Maps Query to below '....' functions
+// Maps the queries defined above to below resolver functions
 var root = {
     course: getCourse,
     courses: getCourses
@@ -46,6 +46,7 @@ var app = express();
 app.use('/graphql', express_graphql({
     schema: schema,
     rootValue: root,
+    //provides an intereface to allow us to test queries
     graphiql: true
 }));
 app.listen(4000, () => console.log('Express GraphQL Server Now Running On localhost:4000/graphql'));
