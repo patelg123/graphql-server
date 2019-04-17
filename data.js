@@ -1,7 +1,7 @@
 module.exports = [
     {
         id: 1,
-        title: 'The Complete Node.js Developer Coursee',
+        title: 'The Complete Node.js Developer Course',
         author: 'Andrew Mead, Rob Percival',
         description: 'Learn Node.js by building real-world applications with Node, Express, MongoDB, Mocha, and more!',
         topic: 'Node.js',

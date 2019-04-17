@@ -7,10 +7,10 @@ var coursesData = require('./data.js');
 // GraphQL schema
 const schema = buildSchema(`
     type Course {
-        id: Int
-        title: String
-        author: String
-        description: String
+        id: Int!
+        title: String!
+        author: String!
+        description: String!
         topic: String
         url: String
     },
@@ -20,12 +20,12 @@ const schema = buildSchema(`
     }
 `);
 
-// Maps the queries defined above to below resolver functions
+//Root Resolver
 var root = {
     course: getCourse,
     courses: getCourses
 };
-
+// Resolver functions
 var getCourse = function(args) {
     var id = args.id;
     return coursesData.filter(course => {
@@ -41,10 +41,13 @@ var getCourses = function(args) {
     }
 }
 
+
+
 // Create an express server and a GraphQL endpoint
 var app = express();
 app.use('/graphql', express_graphql({
     schema: schema,
+    // the root value to the executor
     rootValue: root,
     //provides an intereface to allow us to test queries
     graphiql: true
