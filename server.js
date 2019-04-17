@@ -2,7 +2,29 @@ const express = require('express');
 const express_graphql = require('express-graphql');
 const { buildSchema } = require('graphql');
 
-var coursesData = require('./data.js');
+const coursesData = require('./data.js');
+
+// Resolver functions
+const getCourse = function(args) {
+    let id = args.id;
+    return coursesData.filter(course => {
+        return course.id == id;
+    })[0];
+}
+const getCourses = function(args) {
+    if (args.topic) {
+        let topic = args.topic;
+        return coursesData.filter(course => course.topic === topic);
+    } else {
+        return coursesData;
+    }
+}
+
+//Root Resolver
+const root = {
+    course: getCourse,
+    courses: getCourses
+};
 
 // GraphQL schema
 const schema = buildSchema(`
@@ -20,31 +42,12 @@ const schema = buildSchema(`
     }
 `);
 
-//Root Resolver
-var root = {
-    course: getCourse,
-    courses: getCourses
-};
-// Resolver functions
-var getCourse = function(args) {
-    var id = args.id;
-    return coursesData.filter(course => {
-        return course.id == id;
-    })[0];
-}
-var getCourses = function(args) {
-    if (args.topic) {
-        var topic = args.topic;
-        return coursesData.filter(course => course.topic === topic);
-    } else {
-        return coursesData;
-    }
-}
+
 
 
 
 // Create an express server and a GraphQL endpoint
-var app = express();
+const app = express();
 app.use('/graphql', express_graphql({
     schema: schema,
     // the root value to the executor
